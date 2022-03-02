@@ -42,10 +42,12 @@ app.use("/api/categories", categoriesRoute);
 app.use("/api/templates", templatesRoute);
 app.use("/api/admin", adminsRoute);
 
-app.listen(process.env.PORT || 2000, (err) => {
+let port = process.env.PORT || 2000;
+
+app.listen(port, (err) => {
   if (err) {
     console.log(err);
   } else {
-    console.log("listening on port 2000");
+    console.log("listening on port ", port);
   }
 });
