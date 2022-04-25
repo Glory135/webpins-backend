@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Templates = require("../modals/Template");
 const verify = require("../verify");
+const cloudinary = require("../cloudinary");
 var qs = require("qs");
 
 // download property start
@@ -20,7 +21,22 @@ router.post("/download", (req, res) => {
 
 // create template
 router.post("/create", verify, async (req, res) => {
-  const newTemp = new Templates(req.body);
+  const all = await Templates.find();
+  const nextId = all[all.length - 1].id + 1;
+  const imgStr = req.body.image;
+  const imgRes = await cloudinary.uploader.upload(imgStr, {
+    upload_preset: "webbpins",
+  });
+  const fileStr = req.body.image;
+  const fileRes = await cloudinary.uploader.upload(fileStr, {
+    upload_preset: "webbpins",
+  });
+  const newTemp = new Templates({
+    ...req.body,
+    id: nextId,
+    image: imgRes.url,
+    template_file: fileRes.url,
+  });
   await newTemp
     .save()
     .then((result) => {

@@ -9,10 +9,12 @@ env.config();
 
 // register new Admin
 router.post("/register", async (req, res) => {
+  const all = await Admins.find();
+  const last = all[all.length - 1];
   const salt = await bcrypt.genSalt(10);
   const hashedPass = await bcrypt.hash(req.body.password, salt);
   const newAdmin = new Admins({
-    id: req.body.id,
+    id: last.id + 1,
     name: req.body.name,
     email: req.body.email,
     password: hashedPass,

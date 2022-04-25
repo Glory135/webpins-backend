@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 env.config();
 app.use(express.json());
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+// app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -25,18 +25,18 @@ mongoose
     console.log(err);
   });
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads");
-  },
-  filename: (req, file, cb) => {
-    cb(null, req.body.name);
-  },
-});
-const upload = multer({ storage: storage });
-app.post("/upload", upload.any(), (req, res) => {
-  res.status(200).json("file has been uploaded");
-});
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "uploads");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, req.body.name);
+//   },
+// });
+// const upload = multer({ storage: storage });
+// app.post("/upload", upload.any(), (req, res) => {
+//   res.status(200).json("file has been uploaded");
+// });
 
 app.use("/api/categories", categoriesRoute);
 app.use("/api/templates", templatesRoute);
