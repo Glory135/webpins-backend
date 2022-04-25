@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const Templates = require("../modals/Template");
 const verify = require("../verify");
-const cloudinary = require("../cloudinary");
-var qs = require("qs");
+const { cloudinary } = require("../cloudinary");
 
 // download property start
 router.post("/download", (req, res) => {
