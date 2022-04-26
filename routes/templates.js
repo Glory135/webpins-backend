@@ -5,10 +5,10 @@ const { cloudinary } = require("../cloudinary");
 
 // download property start
 router.post("/download", (req, res) => {
-  const fileName = req.body.fileName;
+  const url = req.body.url;
   if (fileName) {
     try {
-      res.status(200).download("./uploads/" + fileName);
+      res.status(200).download(url);
     } catch (err) {
       res.status(500).json(err);
     }
