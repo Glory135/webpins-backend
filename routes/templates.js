@@ -29,6 +29,7 @@ router.post("/create", verify, async (req, res) => {
   const fileStr = req.body.template_file;
   const fileRes = await cloudinary.uploader.upload(fileStr, {
     upload_preset: "webbpins",
+    resource_type: "raw",
   });
 
   const newTemp = new Templates({
