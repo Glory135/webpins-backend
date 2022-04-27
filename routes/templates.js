@@ -26,17 +26,18 @@ router.post("/create", verify, async (req, res) => {
   const imgRes = await cloudinary.uploader.upload(imgStr, {
     upload_preset: "webbpins",
   });
-  const fileStr = req.body.template_file;
-  const fileRes = await cloudinary.uploader.upload(fileStr, {
-    upload_preset: "webbpins",
-    resource_type: "raw",
-  });
+  // const fileStr = req.body.template_file;
+  // const fileRes = await cloudinary.uploader.upload(fileStr, {
+  //   upload_preset: "webbpins",
+  //   resource_type: "raw",
+  // });
 
   const newTemp = new Templates({
     ...req.body,
     id: nextId,
     image: imgRes.url,
-    template_file: fileRes.url,
+    template_file:
+      "https://res.cloudinary.com/drpa7x9bu/raw/upload/v1651018521/images/zdbrltpgargusnhp9jjh",
   });
   await newTemp
     .save()
