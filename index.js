@@ -14,7 +14,7 @@ env.config();
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+ 
 mongoose
   .connect(process.env.MONGO_URL)
   .then(console.log("connected to db"))
